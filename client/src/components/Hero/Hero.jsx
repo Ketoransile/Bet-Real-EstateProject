@@ -24,8 +24,12 @@ const Hero = () => {
             </motion.h1>
           </div>
           <div className="flexColStart secondaryText flexhero-des">
-            <span>Easily Find a Variety of Properties That Suit You</span>
-            <span>Eliminate the Hassle of Finding Your Ideal Residence</span>
+            <span style={{ color: "rgba(255, 255, 255, 0.919)" }}>
+              Easily Find a Variety of Properties That Suit You
+            </span>
+            <span style={{ color: "rgba(255, 255, 255, 0.919)" }}>
+              Eliminate the Hassle of Finding Your Ideal Residence
+            </span>
           </div>
           {/* <SearchBar /> */}
           <div className="flexCenter stats">
@@ -33,21 +37,36 @@ const Hero = () => {
               <span>
                 <CountUp start={300} end={500} duration={4} /> <span>+</span>
               </span>
-              <span className="secondaryText">Premium Product</span>
+              <span
+                className="secondaryText"
+                style={{ color: "rgba(255, 255, 255, 0.919)" }}
+              >
+                Premium Product
+              </span>
             </div>
 
             <div className="flexColCenter stat">
               <span>
                 <CountUp start={50} end={100} duration={4} /> <span>+</span>
               </span>
-              <span className="secondaryText">Happy Customer</span>
+              <span
+                className="secondaryText"
+                style={{ color: "rgba(255, 255, 255, 0.919)" }}
+              >
+                Happy Customer
+              </span>
             </div>
 
             <div className="flexColCenter stat">
               <span>
                 <CountUp end={5} /> <span>+</span>
               </span>
-              <span className="secondaryText">Awards Winning</span>
+              <span
+                className="secondaryText"
+                style={{ color: "rgba(255, 255, 255, 0.919)" }}
+              >
+                Awards Winning
+              </span>
             </div>
           </div>
         </div>
