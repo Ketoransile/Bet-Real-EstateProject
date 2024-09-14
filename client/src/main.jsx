@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         domain="dev-3u03a67skwnv6f7u.us.auth0.com"
         clientId="WQlNnOUMn8WMUfLyRLQCfprzyTiWZI5U"
         authorizationParams={{
-          redirect_uri: "https://bet-real-estate-project-pi.vercel.app",
+          redirect_uri: "https://bet-real-estate.vercel.app/",
         }}
         audience="http://localhost:8000"
         scope="openid profile email"
