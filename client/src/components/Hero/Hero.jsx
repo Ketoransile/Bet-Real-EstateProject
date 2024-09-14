@@ -27,7 +27,7 @@ const Hero = () => {
             <span>Easily Find a Variety of Properties That Suit You</span>
             <span>Eliminate the Hassle of Finding Your Ideal Residence</span>
           </div>
-          <SearchBar />
+          {/* <SearchBar /> */}
           <div className="flexCenter stats">
             <div className="flexColCenter stat">
               <span>
