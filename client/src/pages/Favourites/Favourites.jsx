@@ -40,22 +40,35 @@ const Favourites = () => {
         <SearchBar filter={filter} setFilter={setFilter} />
 
         <div className="paddings flexCenter properties">
-          {
-            // data.map((card, i)=> (<PropertyCard card={card} key={i}/>))
-
-            data
-              .filter((property) => favourites.includes(property.id))
-
+          {(() => {
+            const safeFavourites = favourites || [];
+            const filteredData = data
+              .filter((property) => safeFavourites.includes(property.id))
               .filter(
                 (property) =>
                   property.title.toLowerCase().includes(filter.toLowerCase()) ||
                   property.city.toLowerCase().includes(filter.toLowerCase()) ||
                   property.country.toLowerCase().includes(filter.toLowerCase())
-              )
-              .map((card, i) => (
-                <PropertyCard card={card} key={i} />
-              ))
-          }
+              );
+
+            if (filteredData.length === 0) {
+              return (
+                <div
+                  className="flexColCenter"
+                  style={{ marginTop: "5rem", opacity: 0.7 }}
+                >
+                  <span className="primaryText">No favourites found</span>
+                  <span className="secondaryText">
+                    You haven't added any properties to your favourites yet.
+                  </span>
+                </div>
+              );
+            }
+
+            return filteredData.map((card, i) => (
+              <PropertyCard card={card} key={i} />
+            ));
+          })()}
         </div>
       </div>
     </div>

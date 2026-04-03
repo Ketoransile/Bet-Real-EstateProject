@@ -21,11 +21,12 @@ export const bookVisit = asyncHandler(async (req, res) => {
   const { email, date } = req.body;
   const { id } = req.params;
   try {
-    const alreadyBooked = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email },
       select: { bookedVisits: true },
     });
-    if (alreadyBooked.bookedVisits.some((visit) => visit.id === id)) {
+    if (!user) return res.status(404).send({ message: "User not found" });
+    if (user.bookedVisits.some((visit) => visit.id === id)) {
       [
         res
           .status(400)
@@ -68,6 +69,7 @@ export const cancelBooking = asyncHandler(async (req, res) => {
       where: { email },
       select: { bookedVisits: true },
     });
+    if (!user) return res.status(404).send({ message: "User not found" });
 
     const index = user.bookedVisits.findIndex((visit) => visit.id === id);
 
@@ -96,6 +98,8 @@ export const toFav = asyncHandler(async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { email },
     });
+    if (!user) return res.status(404).send({ message: "User not found" });
+    
     if (user.favResidenciesID.includes(rid)) {
       const updateUser = await prisma.user.update({
         where: { email },
