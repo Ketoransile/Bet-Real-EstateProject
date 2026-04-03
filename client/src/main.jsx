@@ -13,9 +13,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         clientId={import.meta.env.VITE_AUTH0_CLIENT_ID || "WQlNnOUMn8WMUfLyRLQCfprzyTiWZI5U"}
         authorizationParams={{
           redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI || window.location.origin,
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE || "http://localhost:8000",
+          scope: "openid profile email",
         }}
-        audience={import.meta.env.VITE_AUTH0_AUDIENCE || "http://localhost:8000"}
-        scope="openid profile email"
+        cacheLocation="localstorage"
       >
         <App />
       </Auth0Provider>

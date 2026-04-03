@@ -26,12 +26,11 @@ export const bookVisit = asyncHandler(async (req, res) => {
       select: { bookedVisits: true },
     });
     if (!user) return res.status(404).send({ message: "User not found" });
-    if (user.bookedVisits.some((visit) => visit.id === id)) {
-      [
-        res
+    let bookedVisits = user.bookedVisits || [];
+    if (bookedVisits.some((visit) => visit.id === id)) {
+      return res
           .status(400)
-          .json({ message: "This residency is already booked by you" }),
-      ];
+          .json({ message: "This residency is already booked by you" });
     } else {
       await prisma.user.update({
         where: { email: email },
@@ -71,16 +70,17 @@ export const cancelBooking = asyncHandler(async (req, res) => {
     });
     if (!user) return res.status(404).send({ message: "User not found" });
 
-    const index = user.bookedVisits.findIndex((visit) => visit.id === id);
+    let bookedVisits = user.bookedVisits || [];
+    const index = bookedVisits.findIndex((visit) => visit.id === id);
 
     if (index === -1) {
       res.status(404).json({ message: "Booking not found " });
     } else {
-      user.bookedVisits.splice(index, 1);
+      bookedVisits.splice(index, 1);
       await prisma.user.update({
         where: { email },
         data: {
-          bookedVisits: user.bookedVisits,
+          bookedVisits: bookedVisits,
         },
       });
       res.send("Booking cancelled successfully");
@@ -99,13 +99,14 @@ export const toFav = asyncHandler(async (req, res) => {
       where: { email },
     });
     if (!user) return res.status(404).send({ message: "User not found" });
+    let favResidenciesID = user.favResidenciesID || [];
     
-    if (user.favResidenciesID.includes(rid)) {
+    if (favResidenciesID.includes(rid)) {
       const updateUser = await prisma.user.update({
         where: { email },
         data: {
           favResidenciesID: {
-            set: user.favResidenciesID.filter((id) => id !== rid),
+            set: favResidenciesID.filter((id) => id !== rid),
           },
         },
       });
