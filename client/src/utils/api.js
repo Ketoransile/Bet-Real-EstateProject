@@ -168,7 +168,7 @@ import dayjs from "dayjs";
 import { toast } from "react-toastify";
 
 export const api = axios.create({
-  baseURL: "https://bet-real-estate-project.vercel.app/api/",
+  baseURL: import.meta.env.VITE_API_BASE_URL || "https://bet-real-estate-project.vercel.app/api/",
 });
 
 export const getAllProperties = async () => {

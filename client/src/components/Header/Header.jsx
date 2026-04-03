@@ -12,7 +12,7 @@ import useAuthCheck from "../../hooks/useAuthCheck.jsx";
 
 const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
-  const headerColor = useHeaderColor();
+  const isScrolled = useHeaderColor();
   const [modalOpened, setModalOpened] = useState(false);
   const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
   const { validateLogin } = useAuthCheck();
@@ -22,7 +22,7 @@ const Header = () => {
     }
   };
   return (
-    <section className="h-wrapper" style={{ background: headerColor }}>
+    <section className="h-wrapper">
       <div className="flexCenter innerWidth paddings h-container">
         {/* logo */}
         <Link to="/">
@@ -40,11 +40,11 @@ const Header = () => {
             className="flexCenter h-menu"
             style={getMenuStyles(menuOpened)}
           >
-            <NavLink to="/properties">Properties</NavLink>
-            <a href="mailto:abdisileshi123@gmail.com">Contact</a>
+            <NavLink to="/properties" className="nav-link">Properties</NavLink>
+            <a href="mailto:abdisileshi123@gmail.com" className="nav-link">Contact</a>
 
             {/* add property */}
-            <div onClick={handleAddPropertyClick}>Add Property</div>
+            <div className="add-property-btn" onClick={handleAddPropertyClick}>Add Property</div>
             <AddPropertyModal opened={modalOpened} setOpened={setModalOpened} />
             {/*Login Button*/}
             {!isAuthenticated ? (

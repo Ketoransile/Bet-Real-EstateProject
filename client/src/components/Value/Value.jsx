@@ -57,11 +57,15 @@ const Value = () => {
                     <AccordionItemButton className="flexCenter accordionButton ">
                       {/* just for getting state of item */}
                       <AccordionItemState>
-                        {({ expanded }) =>
-                          expanded
-                            ? setClassName("expanded")
-                            : setClassName("collapsed")
-                        }
+                        {({ expanded }) => {
+                          const nextClass = expanded ? "expanded" : "collapsed";
+                          if (className !== nextClass) {
+                            setTimeout(() => {
+                              setClassName(nextClass);
+                            }, 0);
+                          }
+                          return null;
+                        }}
                       </AccordionItemState>
                       <div className="flexCenter icon">{item.icon}</div>
                       <span className="primaryText">{item.heading}</span>

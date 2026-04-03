@@ -1,21 +1,40 @@
 .h-wrapper {
-  z-index: 99;
-  position: sticky;
-  top: 0;
+  z-index: 9999;
+  position: relative; /* Restored to standard relative flow */
+  width: 100%;
+  background: transparent;
 }
+
 .h-container {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   color: var(--secondary);
   justify-content: space-between;
 }
 
 .h-menu {
-  gap: 2rem;
+  gap: 2.5rem;
 }
 .h-menu > *:hover {
   cursor: pointer;
+  color: #fff;
 }
+
+/* Beautiful Action Button */
+.add-property-btn {
+  font-weight: 500;
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 300ms ease;
+}
+.add-property-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 4px 15px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
 .menu-icon {
   display: none;
 }
@@ -23,21 +42,26 @@
 @media (max-width: 768px) {
   .menu-icon {
     display: block;
+    cursor: pointer;
   }
   .h-menu {
-    color: var(--black);
     position: absolute;
+    flex-direction: column;
+    right: 2rem;
+    top: 4.5rem;
+    /* Glassmorphism for mobile dropdown */
+    background: rgba(11, 40, 119, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: white;
     gap: 2rem;
     font-weight: 500;
-    flex-direction: column;
-    right: 4rem;
-    top: 3rem;
-    background: white;
     display: flex;
-    border-radius: 10px;
-    transition: all 200ms ease;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 400ms ease;
     align-items: flex-start;
     padding: 3rem;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.4);
   }
 }

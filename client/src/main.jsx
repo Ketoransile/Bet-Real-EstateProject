@@ -9,12 +9,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <MantineProvider withGlobalStyles withNormalizeCSS>
     <React.StrictMode>
       <Auth0Provider
-        domain="dev-3u03a67skwnv6f7u.us.auth0.com"
-        clientId="WQlNnOUMn8WMUfLyRLQCfprzyTiWZI5U"
+        domain={import.meta.env.VITE_AUTH0_DOMAIN || "dev-3u03a67skwnv6f7u.us.auth0.com"}
+        clientId={import.meta.env.VITE_AUTH0_CLIENT_ID || "WQlNnOUMn8WMUfLyRLQCfprzyTiWZI5U"}
         authorizationParams={{
-          redirect_uri: "https://bet-real-estate.vercel.app/",
+          redirect_uri: import.meta.env.VITE_AUTH0_REDIRECT_URI || window.location.origin,
         }}
-        audience="http://localhost:8000"
+        audience={import.meta.env.VITE_AUTH0_AUDIENCE || "http://localhost:8000"}
         scope="openid profile email"
       >
         <App />

@@ -24,7 +24,7 @@ const Layout = () => {
     const getTokenAndRegister = async () => {
       const res = await getAccessTokenWithPopup({
         authorizationParams: {
-          audience: "http://localhost:8000",
+          audience: import.meta.env.VITE_AUTH0_AUDIENCE || "http://localhost:8000",
           scope: "openid profile email",
         },
       });
@@ -37,7 +37,7 @@ const Layout = () => {
   }, [isAuthenticated]);
   return (
     <>
-      <div style={{ background: "var(--black)", overflow: "hidden" }}>
+      <div style={{ background: "var(--black)", overflowX: "hidden" }}>
         <Header />
         <Outlet />
       </div>
