@@ -381,7 +381,7 @@
 // };
 
 // export default Facilities;
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth } from "../../context/AuthContext.jsx";
 import { Box, Button, Group, NumberInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React, { useContext } from "react";
@@ -424,7 +424,7 @@ const Facilities = ({
   };
 
   // ==================== upload logic
-  const { user } = useAuth0();
+  const { user } = useAuth();
   console.log("User email:", user?.email);
   const {
     userDetails: { token },

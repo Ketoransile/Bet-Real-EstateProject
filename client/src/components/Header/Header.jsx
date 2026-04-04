@@ -5,7 +5,8 @@ import { getMenuStyles } from "../../utils/common";
 import useHeaderColor from "../../hooks/useHeaderColor";
 import OutsideClickHandler from "react-outside-click-handler";
 import { Link, NavLink } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useAuth } from "../../context/AuthContext.jsx";
 import ProfileMenu from "../ProfileMenu/ProfileMenu.jsx";
 import AddPropertyModal from "../AddPropertyModal/AddPropertyModal.jsx";
 import useAuthCheck from "../../hooks/useAuthCheck.jsx";
@@ -14,19 +15,32 @@ const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const isScrolled = useHeaderColor();
   const [modalOpened, setModalOpened] = useState(false);
-  const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
+  const { handleLoginSuccess, isAuthenticated, user, logout } = useAuth();
   const { validateLogin } = useAuthCheck();
+
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => handleLoginSuccess(tokenResponse),
+    onError: () => console.log('Login Failed'),
+  });
+
   const handleAddPropertyClick = () => {
     if (validateLogin()) {
       setModalOpened(true);
     }
   };
   return (
-    <section className="h-wrapper">
-      <div className="flexCenter innerWidth paddings h-container">
+    <header 
+      className="h-wrapper"
+      style={{
+        background: isScrolled ? "var(--black)" : "transparent",
+        boxShadow: isScrolled ? "0 4px 15px rgba(0,0,0,0.3)" : "none",
+        borderBottom: isScrolled ? "none" : "2px solid rgba(255, 255, 255, 0.05)"
+      }}
+    >
+      <div className="h-container">
         {/* logo */}
         <Link to="/">
-          <img src="./logo.png" alt="logo" width={300} />
+          <img src="./logo.png" alt="logo" className="logo-img" />
         </Link>
 
         {/* menu */}
@@ -36,8 +50,7 @@ const Header = () => {
           }}
         >
           <div
-            // ref={menuRef}
-            className="flexCenter h-menu"
+            className="h-menu"
             style={getMenuStyles(menuOpened)}
           >
             <NavLink to="/properties" className="nav-link">Properties</NavLink>
@@ -46,9 +59,10 @@ const Header = () => {
             {/* add property */}
             <div className="add-property-btn" onClick={handleAddPropertyClick}>Add Property</div>
             <AddPropertyModal opened={modalOpened} setOpened={setModalOpened} />
+            
             {/*Login Button*/}
             {!isAuthenticated ? (
-              <button className="button" onClick={() => loginWithRedirect()}>
+              <button className="button" onClick={() => login()}>
                 Login
               </button>
             ) : (
@@ -65,7 +79,7 @@ const Header = () => {
           <BiMenuAltRight size={30} />
         </div>
       </div>
-    </section>
+    </header>
   );
 };
 
