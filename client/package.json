@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@auth0/auth0-react": "^2.0.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mantine/core": "^6.0.16",
@@ -19,11 +18,13 @@
     "@mantine/modals": "^6.0.16",
     "@mui/lab": "^6.0.0-beta.9",
     "@mui/x-date-pickers": "^7.16.0",
+    "@react-oauth/google": "^0.13.4",
     "@tanstack/react-query-devtools": "^5.55.0",
     "axios": "^1.7.7",
     "dayjs": "^1.11.13",
     "esri-leaflet-geocoder": "2.3.3",
     "framer-motion": "^10.8.5",
+    "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
