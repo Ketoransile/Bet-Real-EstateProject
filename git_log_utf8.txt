@@ -1,0 +1,5 @@
+﻿6f6fd74 chore: untrack server/.env file
+da4abdc fix: booking and favourites functionality - use getAccessTokenSilently, fix navigation paths, add null safety
+6131960 Fix frontend array undefined crash and implement empty states for Favourites and Bookings
+b10d400 Complete updates for environment config, UI enhancements, and DB seed
+4437b9b Fix navbar layout, remove leaked env secrets, and untrack server node_modules
